@@ -14,10 +14,10 @@ class ListsController < ApplicationController
   def create
     @list = List.new(params[:list])
     if @list.save
-      redirect_to lists_path
       flash[:notice] = "Your " + @list.name + " was successfully added"
+      redirect_to lists_path
     else
-      render:new
+      render :new
     end
   end
 
@@ -28,8 +28,8 @@ class ListsController < ApplicationController
   def update
     @list = List.find(params[:id])
     if @list.update(params[:list])
-      redirect_to lists_path
       flash[:notice] = "Your " + @list.name + " was successfully updated"
+      redirect_to list_path(@list)
     else
       render :edit
     end
@@ -38,7 +38,12 @@ class ListsController < ApplicationController
   def destroy
     @list = List.find(params[:id])
     @list.destroy
-    redirect_to lists_path
     flash[:notice] = "The list was successfully DESTROYED!"
+    redirect_to lists_path
+  end
+
+private
+  def list_params
+    params.require(:list).permit(:name, :description)
   end
 end
