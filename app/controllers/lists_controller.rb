@@ -15,6 +15,7 @@ class ListsController < ApplicationController
     @list = List.new(params[:list])
     if @list.save
       redirect_to lists_path
+      flash[:notice] = "Your " + @list.name + " was successfully added"
     else
       render:new
     end
@@ -28,6 +29,7 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     if @list.update(params[:list])
       redirect_to lists_path
+      flash[:notice] = "Your " + @list.name + " was successfully updated"
     else
       render :edit
     end
@@ -37,5 +39,6 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     @list.destroy
     redirect_to lists_path
+    flash[:notice] = "The list was successfully DESTROYED!"
   end
 end
