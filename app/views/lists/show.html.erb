@@ -1,0 +1,12 @@
+<h1><%= @list.name %></h1>
+
+<h4><%= @list.description %></h4>
+
+<p><%= link_to "Edit this list", edit_list_path(@list) %></p>
+<p><%= link_to "Delete this list", list_path(@list),
+                                :data => {:confirm => "You sure?",
+                                          :method => "delete"} %></p>
+
+<p>
+  <%= link_to "Return to lists", lists_path %>
+</p>

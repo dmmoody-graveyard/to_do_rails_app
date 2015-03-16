@@ -3,9 +3,12 @@ class ListsController < ApplicationController
     @lists = List.all
   end
 
+  def show
+    @list = List.find(params[:id])
+  end
+
   def new
     @list = List.new
-    render :new
   end
 
   def create
@@ -15,5 +18,24 @@ class ListsController < ApplicationController
     else
       render:new
     end
+  end
+
+  def edit
+    @list = List.find(params[:id])
+  end
+
+  def update
+    @list = List.find(params[:id])
+    if @list.update(params[:list])
+      redirect_to lists_path
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @list = List.find(params[:id])
+    @list.destroy
+    redirect_to lists_path
   end
 end
